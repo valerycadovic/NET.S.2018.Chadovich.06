@@ -10,6 +10,7 @@
     /// <seealso cref="System.IFormattable" />
     public class Customer : IFormattable
     {
+        #region Private variables and constatns
         /// <summary>
         /// The available format chars
         /// </summary>
@@ -29,7 +30,9 @@
         /// The revenue of a customer
         /// </summary>
         private decimal revenue;
-        
+        #endregion
+
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Customer"/> class.
         /// </summary>
@@ -46,7 +49,9 @@
             this.ContactPhone = phone;
             this.Revenue = revenue;
         }
-        
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Gets the name of a customer.
         /// </summary>
@@ -113,7 +118,9 @@
                 this.revenue = value;
             }
         }
+        #endregion
 
+        #region Overrided methods of System.Object
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
@@ -122,9 +129,15 @@
         /// </returns>
         public override string ToString()
         {
-            return this.ToString("G");
+            string result = string.Empty;
+            result += string.Format(CultureInfo.CurrentCulture, "{0}", this.Name) + ", ";
+            result += this.FormDecimal(this.Revenue) + ", ";
+            result += string.Format(CultureInfo.CurrentCulture, "{0}", this.ContactPhone);
+            return result;
         }
+        #endregion
 
+        #region IFormattable implementation
         /// <inheritdoc />
         /// <summary>
         /// Returns a <see cref="T:System.String" /> that represents this instance.
@@ -138,11 +151,7 @@
         {
             if (string.IsNullOrEmpty(format) || format.Equals("G", StringComparison.InvariantCultureIgnoreCase))
             {
-                string result = string.Empty;
-                result += string.Format(formatProvider, "{0}", this.Name) + ", ";
-                result += this.FormDecimal(this.Revenue) + ", ";
-                result += string.Format(formatProvider, "{0}", this.ContactPhone);
-                return result;
+                return this.ToString();
             }
 
             if (formatProvider == null)
@@ -154,7 +163,9 @@
 
             return this.FormString(format, formatProvider);
         }
+        #endregion
 
+        #region Private methods
         /// <summary>
         /// Validates the format.
         /// </summary>
@@ -230,5 +241,6 @@
 
             return result;
         }
+        #endregion
     }
 }
