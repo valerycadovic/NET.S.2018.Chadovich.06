@@ -17,6 +17,11 @@
         private const string AvailableFormatChars = "NRP";
 
         /// <summary>
+        /// The default value
+        /// </summary>
+        private const string DefaultValue = "G";
+
+        /// <summary>
         /// The name of a customer
         /// </summary>
         private string name;
@@ -131,7 +136,7 @@
         {
             string result = string.Empty;
             result += string.Format(CultureInfo.CurrentCulture, "{0}", this.Name) + ", ";
-            result += this.FormDecimal(this.Revenue) + ", ";
+            result += this.Revenue.ToString("N2", CultureInfo.CurrentCulture) + ", ";
             result += string.Format(CultureInfo.CurrentCulture, "{0}", this.ContactPhone);
             return result;
         }
@@ -149,7 +154,7 @@
         /// </returns>
         public string ToString(string format, IFormatProvider formatProvider = null)
         {
-            if (string.IsNullOrEmpty(format) || format.Equals("G", StringComparison.InvariantCultureIgnoreCase))
+            if (string.IsNullOrEmpty(format) || format.Equals(DefaultValue, StringComparison.InvariantCultureIgnoreCase))
             {
                 return this.ToString();
             }
@@ -213,7 +218,7 @@
                         result += string.Format(formatProvider, "{0}", this.ContactPhone);
                         break;
                     case 'R':
-                        result += this.FormDecimal(this.Revenue);
+                        result += this.Revenue.ToString("N2", formatProvider);
                         break;
                 }
 
@@ -222,22 +227,6 @@
                     result += ", ";
                 }
             }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Forms the decimal.
-        /// </summary>
-        /// <param name="d">The d.</param>
-        /// <returns>The string.</returns>
-        private string FormDecimal(decimal d)
-        {
-            string result = string.Empty;
-
-            NumberFormatInfo f = new NumberFormatInfo();
-            f.NumberGroupSeparator = ",";
-            result += this.Revenue.ToString("N2", f);
 
             return result;
         }
