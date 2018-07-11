@@ -20,6 +20,7 @@ namespace Day7_8.Tests
         [TestCase("nR", ExpectedResult = "Jeffrey Richter, 1,000,000.00")]
         [TestCase("RP", ExpectedResult = "1,000,000.00, +1 (425) 555-0100")]
         [TestCase("NRP", ExpectedResult = "Jeffrey Richter, 1,000,000.00, +1 (425) 555-0100")]
+        [TestCase("PNR", ExpectedResult = "+1 (425) 555-0100, Jeffrey Richter, 1,000,000.00")]
         [TestCase("R", ExpectedResult = "1,000,000.00")]
         [TestCase("P", ExpectedResult = "+1 (425) 555-0100")]
         [TestCase("p", ExpectedResult = "+1 (425) 555-0100")]

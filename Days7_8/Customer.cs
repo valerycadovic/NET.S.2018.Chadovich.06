@@ -164,38 +164,16 @@
                 formatProvider = CultureInfo.CurrentCulture;
             }
 
-            this.ValidateFormat(format);
-
-            return this.FormString(format, formatProvider);
-        }
-        #endregion
-
-        #region Private methods
-        /// <summary>
-        /// Validates the format.
-        /// </summary>
-        /// <param name="format">The format.</param>
-        private void ValidateFormat(string format)
-        {
             if (format.Length > AvailableFormatChars.Length)
             {
                 throw new FormatException($"{nameof(format)} is invalid. See the documentation");
             }
-
-            string upperFormat = format.ToUpperInvariant();
-            string reminder = AvailableFormatChars;
-
-            foreach (var item in upperFormat)
-            {
-                if (reminder.IndexOf(item) == -1)
-                {
-                    throw new FormatException($"{nameof(format)} is invalid. See the documentation");
-                }
-
-                reminder = reminder.Remove(reminder.IndexOf(item), 1);
-            }
+            
+            return this.FormString(format.ToUpperInvariant(), formatProvider);
         }
+        #endregion
 
+        #region Private methods
         /// <summary>
         /// Forms the string.
         /// </summary>
@@ -205,11 +183,11 @@
         private string FormString(string format, IFormatProvider formatProvider)
         {
             string result = string.Empty;
-            string ignoredCaseFormat = format.ToUpperInvariant();
+            string remainder = AvailableFormatChars;
 
-            for (int i = 0; i < ignoredCaseFormat.Length; i++)
+            for (int i = 0; i < format.Length; i++)
             {
-                switch (ignoredCaseFormat[i])
+                switch (format[i])
                 {
                     case 'N':
                         result += string.Format(formatProvider, "{0}", this.Name);
@@ -220,7 +198,11 @@
                     case 'R':
                         result += this.Revenue.ToString("N2", formatProvider);
                         break;
+                    default:
+                        throw new FormatException($"{nameof(format)} is invalid. See the documentation");
                 }
+
+                remainder = remainder.Remove(remainder.IndexOf(format[i]), 1);
 
                 if (i != format.Length - 1)
                 {
