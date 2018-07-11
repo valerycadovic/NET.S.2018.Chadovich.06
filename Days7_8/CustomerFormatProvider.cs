@@ -11,11 +11,6 @@
     public class CustomerFormatProvider : IFormatProvider, ICustomFormatter
     {
         /// <summary>
-        /// The default format
-        /// </summary>
-        private const string DefaultFormat = "G";
-
-        /// <summary>
         /// The parent
         /// </summary>
         private readonly IFormatProvider parent;
