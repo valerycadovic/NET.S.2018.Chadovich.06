@@ -26,5 +26,14 @@ namespace Day7_8.Tests
         [TestCase("p", ExpectedResult = "+1 (425) 555-0100")]
         public string Can_Format_By_Format_String(string format) =>
             customer.ToString(format, CultureInfo.InvariantCulture);
+
+        [TestCase("jeffrey richter", 1000000, "+1 (425) 555-0100")]
+        [TestCase("Valery Chadovich", 45, "555-0100")]
+        public void Ctor_Throws_FormatException_When_Params_Invalid(string name, decimal revenue, string phone) =>
+            Assert.Throws<FormatException>(() => new Customer(name, phone, revenue));
+        
+        [TestCase("Valery Chadovich", -45, "+375 (25) 957-7240")]
+        public void Ctor_Throws_When_ArgumentOutOfRangeException_When_Revenue_Negative(string name, decimal revenue, string phone) =>
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Customer(name, phone, revenue));
     }
 }

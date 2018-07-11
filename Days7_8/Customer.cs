@@ -33,9 +33,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Customer"/> class.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="phone">The phone.</param>
-        /// <param name="revenue">The revenue.</param>
+        /// <param name="name">
+        /// The name. Format example: Jeffrey Richter is ok, jeffrey richter is not ok
+        /// </param>
+        /// <param name="phone">The phone. Required format: [+State code (operator code) ddd-dddd]</param>
+        /// <param name="revenue">The revenue. It must be non-negative</param>
+        /// <exception cref="FormatException">Throws when the format of the name or phone are invalid</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when revenue is negative</exception>
         public Customer(string name, string phone, decimal revenue)
         {
             this.Name = name;
