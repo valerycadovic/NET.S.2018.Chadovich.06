@@ -1,7 +1,8 @@
-﻿namespace Days7_8
+﻿namespace CustomerExtension
 {
     using System;
     using System.Globalization;
+    using Days7_8;
 
     /// <summary>
     /// Format provider for <see cref="Customer"/>

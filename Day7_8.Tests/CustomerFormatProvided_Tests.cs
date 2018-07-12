@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Days7_8;
+using CustomerExtension;
 
 namespace Day7_8.Tests
 {
