@@ -8,5 +8,5 @@
   - [Решение](https://github.com/valerycadovic/NET.S.2018.Chadovich.06/tree/master/Days7_8)
   - [Тесты](https://github.com/valerycadovic/NET.S.2018.Chadovich.06/blob/master/Day7_8.Tests/Customer_Tests.cs)
 - Не изменяя класс Customer, добавить для объектов данного класса дополнительную возможность форматирования, не предусмотренную классом. Разработать модульные тесты.
-  - [Решение](https://github.com/valerycadovic/NET.S.2018.Chadovich.06/blob/master/Days7_8/CustomerFormatProvider.cs)
+  - [Решение](https://github.com/valerycadovic/NET.S.2018.Chadovich.06/blob/master/CustomerExtension/CustomerFormatProvider.cs)
   - [Тесты](https://github.com/valerycadovic/NET.S.2018.Chadovich.06/blob/master/Day7_8.Tests/CustomerFormatProvided_Tests.cs)
