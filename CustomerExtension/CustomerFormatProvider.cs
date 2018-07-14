@@ -56,29 +56,26 @@
         /// <exception cref="System.FormatException">Throws when the format is invalid</exception>
         /// <exception cref="System.ArgumentNullException">Thows when arg is null</exception>
         /// <exception cref="System.ArgumentException">Throws when arg is not <see cref="Customer"/>/></exception>
-        public string Format(string format, object arg, IFormatProvider formatProvider = null)
+        public string Format(string format, object arg, IFormatProvider formatProvider)
         {
             if (arg is null)
             {
                 throw new ArgumentNullException($"{nameof(arg)} is null");
             }
-
-            if (!(arg is Customer customer))
+            
+            if (arg.GetType() != typeof(Customer))
             {
-                throw new ArgumentException($"{nameof(arg)} must have a type of Customer");
+                throw new ArgumentException($"{nameof(arg)} must have type Customer");
             }
-
-            if (formatProvider is null)
-            {
-                formatProvider = parent;
-            }
+            
+            Customer customer = (Customer)arg;
 
             if (!format.Equals("REV", StringComparison.OrdinalIgnoreCase))
             {
-                return customer.ToString(format, formatProvider);
+                return customer.ToString(format, parent);
             }
             
-            return Reverse(customer.ToString("NRP", formatProvider));
+            return Reverse(customer.ToString("NRP", parent));
         }
 
         /// <summary>

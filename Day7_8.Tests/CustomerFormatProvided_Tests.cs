@@ -21,7 +21,7 @@ namespace Day7_8.Tests
         [TestCase("rev", ExpectedResult = "0010-555 )524( 1+ ,00.000,000,1 ,rethciR yerffeJ")]
         public string Can_Format_By_Format_String(string format)
         {
-            return new CustomerFormatProvider().Format(format, customer, CultureInfo.InvariantCulture);
+            return string.Format(new CustomerFormatProvider(CultureInfo.InvariantCulture), $"{{0:{format}}}", customer);
         }
 
         [Test]
